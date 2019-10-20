@@ -17,7 +17,7 @@ export const getLangs = async () => {
 }
 export const translate = async (string,source,target)=> {
   const response = await axios.get(`${baseUrl}?text=${string}&lang=${source}-${target}&key=${apiKey}`)
-  debugger;
+  
   console.log(response.data.text[0])
   console.log(typeof response.data.text[0])
   return response.data.text[0];
@@ -26,7 +26,9 @@ export const translate = async (string,source,target)=> {
 export const test = async (word) => {
   const response = await axios.get(`https://www.dictionaryapi.com/api/v3/references/ithesaurus/json/${word}?
   key=${meriamApiKey}`)
-  debugger;
+ 
   return response.data
 }
+
+
 

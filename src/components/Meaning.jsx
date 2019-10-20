@@ -6,7 +6,7 @@ export default function Meaning(props) {
     <div>
       {props.meaning.map(element => (
         <div key={element.meta.uuid}>
-          <p>{element.shortdef.map(el => <p>{el}</p>)}</p>
+          <div>{element.shortdef.map(el => <div key={el}><li>{el}</li></div>)}</div>
         </div>
       ))}
     </div>

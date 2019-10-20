@@ -60,11 +60,21 @@ class App extends React.Component {
     this.setState({
       translation
     })
-    // if (this.state.sourceLanguage === "en") {
-    //   this.getMeaning(string) 
-    // } else if (this.state.targetLanguage === "en"){
-    //   this.getMeaning(translation)
-    // }
+    if (sourceLanguage === "en") {
+      this.getMeaning(string) 
+    } else if (targetLanguage === "en"){
+      this.getMeaning(translation)
+    }
+    this.setState({
+      formData: {
+        string: '',
+        sourceLanguage: '',
+        targetLanguage: '',
+      }
+    })
+    
+    // await dictionaryWord(string, sourceLanguage, targetLanguage)
+   
   }
 
   getMeaning = async (string) => {

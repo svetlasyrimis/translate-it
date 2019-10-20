@@ -25,7 +25,7 @@ export default function Form(props) {
               ))
           }
         </select>
-        <h2>Choose a Source Language</h2>
+        <h2>Choose a Target Language</h2>
 
         <select
           
