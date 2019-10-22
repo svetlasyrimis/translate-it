@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
-import { translate, getLangs, test } from './services/api-helper';
-import Form from './components/Form'
-import Translation from './components/Translation'
-import Meaning from './components/Meaning'
+import { translate, getLangs, test,lingueeTranslation } from './services/api-helper';
+import Form from './components/Form';
+import Translation from './components/Translation';
+import Meaning from './components/Meaning';
+import Examples from './components/Examples';
+
+
 
 
 class App extends React.Component {
@@ -16,7 +19,8 @@ class App extends React.Component {
         sourceLanguage: '',
         targetLanguage: '',
       },
-      meaning:''
+      meaning: '',
+      exampleUsage:[]
     }
   }
 
@@ -51,7 +55,7 @@ class App extends React.Component {
     return newObj
   }
 
-
+  
   getTranslation = async (e) => {
     const { string, sourceLanguage, targetLanguage } = this.state.formData;
     e.preventDefault();
@@ -60,17 +64,24 @@ class App extends React.Component {
     this.setState({
       translation
     })
+    debugger;
+    const examples = await lingueeTranslation(string, sourceLanguage, targetLanguage)
+    
+    
+
     if (sourceLanguage === "en") {
       this.getMeaning(string) 
     } else if (targetLanguage === "en"){
       this.getMeaning(translation)
     }
+   
     this.setState({
       formData: {
         string: '',
         sourceLanguage: '',
         targetLanguage: '',
-      }
+      },
+      exampleUsage: examples
     })
     
     // await dictionaryWord(string, sourceLanguage, targetLanguage)
@@ -102,7 +113,10 @@ class App extends React.Component {
           sourceLanguage={this.state.formData.sourceLanguage}
           targetLanguage={this.state.formData.targetLanguage}/>}
         <Translation translation={this.state.translation} />
-        {this.state.meaning && <Meaning meaning={this.state.meaning} /> }
+        <Examples examples={this.state.exampleUsage} />
+        {this.state.meaning && <Meaning meaning={this.state.meaning} />
+          
+        }
       </div>
     );
   }

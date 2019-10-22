@@ -17,9 +17,6 @@ export const getLangs = async () => {
 }
 export const translate = async (string,source,target)=> {
   const response = await axios.get(`${baseUrl}?text=${string}&lang=${source}-${target}&key=${apiKey}`)
-  
-  console.log(response.data.text[0])
-  console.log(typeof response.data.text[0])
   return response.data.text[0];
 }
 
@@ -28,6 +25,13 @@ export const test = async (word) => {
   key=${meriamApiKey}`)
  
   return response.data
+}
+
+export const lingueeTranslation = async (string,source,target) => {
+  const response = await axios.get(`https://linguee-api.herokuapp.com/api?q=${string}&src=${source}&dst=${target}`)
+  const examples = response.data.real_examples.splice(0,5);
+  
+  return examples
 }
 
 
